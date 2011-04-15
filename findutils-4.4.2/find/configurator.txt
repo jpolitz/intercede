@@ -1,0 +1,1 @@
+/usr/lib/ruby/gems/1.8/doc/mongrel-1.1.5/rdoc/classes/Mongrel/Rails/RailsConfigurator.html
