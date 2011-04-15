@@ -713,8 +713,8 @@ configure:6848: $? = 0
 configure:6866: result: yes
 configure:6786: checking for resolvepath
 configure:6842: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
-/tmp/cc9EmJQ4.o: In function `main':
-/home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/conftest.c:88: undefined reference to `resolvepath'
+/tmp/ccogNvg3.o: In function `main':
+/home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/conftest.c:88: undefined reference to `resolvepath'
 collect2: ld returned 1 exit status
 configure:6848: $? = 1
 configure: failed program was:
@@ -866,8 +866,8 @@ configure:6848: $? = 0
 configure:6866: result: yes
 configure:6786: checking for fpurge
 configure:6842: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
-/tmp/cc60vwTZ.o: In function `main':
-/home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/conftest.c:101: undefined reference to `fpurge'
+/tmp/ccy8dtj2.o: In function `main':
+/home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/conftest.c:101: undefined reference to `fpurge'
 collect2: ld returned 1 exit status
 configure:6848: $? = 1
 configure: failed program was:
@@ -1106,8 +1106,8 @@ configure:6848: $? = 0
 configure:6866: result: yes
 configure:6786: checking for nanotime
 configure:6842: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
-/tmp/ccp1Kw2o.o: In function `main':
-/home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/conftest.c:105: undefined reference to `nanotime'
+/tmp/ccXYfdQp.o: In function `main':
+/home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/conftest.c:105: undefined reference to `nanotime'
 collect2: ld returned 1 exit status
 configure:6848: $? = 1
 configure: failed program was:
@@ -2099,8 +2099,8 @@ configure:13424: checking whether this system has an arbitrary file name length 
 configure:13450: result: yes
 configure:13609: checking for library containing clock_gettime
 configure:13650: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
-/tmp/cc0PVoyv.o: In function `main':
-/home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/conftest.c:139: undefined reference to `clock_gettime'
+/tmp/ccxnaZMx.o: In function `main':
+/home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/conftest.c:139: undefined reference to `clock_gettime'
 collect2: ld returned 1 exit status
 configure:13656: $? = 1
 configure: failed program was:
@@ -3286,8 +3286,8 @@ configure:20862: $? = 0
 configure:20878: result: yes
 configure:20921: checking for listmntent
 configure:20977: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
-/tmp/ccukK3vR.o: In function `main':
-/home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/conftest.c:199: undefined reference to `listmntent'
+/tmp/ccvHIfuT.o: In function `main':
+/home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/conftest.c:199: undefined reference to `listmntent'
 collect2: ld returned 1 exit status
 configure:20983: $? = 1
 configure: failed program was:
@@ -3496,8 +3496,8 @@ configure: failed program was:
 configure:21001: result: no
 configure:20921: checking for getmntinfo
 configure:20977: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
-/tmp/ccKewKcY.o: In function `main':
-/home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/conftest.c:199: undefined reference to `getmntinfo'
+/tmp/ccs6GpvY.o: In function `main':
+/home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/conftest.c:199: undefined reference to `getmntinfo'
 collect2: ld returned 1 exit status
 configure:20983: $? = 1
 configure: failed program was:
@@ -8665,8 +8665,8 @@ configure:33682: $? = 0
 configure:33700: result: yes
 configure:33707: checking for _doprnt
 configure:33763: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
-/tmp/ccMLxRmi.o: In function `main':
-/home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/conftest.c:274: undefined reference to `_doprnt'
+/tmp/ccGiql2p.o: In function `main':
+/home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/conftest.c:274: undefined reference to `_doprnt'
 collect2: ld returned 1 exit status
 configure:33769: $? = 1
 configure: failed program was:
@@ -8981,8 +8981,8 @@ configure:34756: $? = 0
 configure:34774: result: yes
 configure:34798: checking for forcefindlib
 configure:34854: gcc -std=gnu99 -o conftest -g -O2   conftest.c  >&5
-/tmp/ccTUVOYO.o: In function `main':
-/home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/conftest.c:281: undefined reference to `forcefindlib'
+/tmp/ccxUyZhW.o: In function `main':
+/home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/conftest.c:281: undefined reference to `forcefindlib'
 collect2: ld returned 1 exit status
 configure:34860: $? = 1
 configure: failed program was:
@@ -10193,17 +10193,17 @@ jy_cv_cc_attribute_noreturn=yes
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/build-aux/missing --run aclocal-1.10'
+ACLOCAL='${SHELL} /home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/build-aux/missing --run aclocal-1.10'
 ALLOCA=''
 ALLOCA_H='alloca.h'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
-AMTAR='${SHELL} /home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/build-aux/missing --run tar'
+AMTAR='${SHELL} /home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/build-aux/missing --run tar'
 ANSI2KNR=''
-AUTOCONF='${SHELL} /home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/build-aux/missing --run autoconf'
-AUTOHEADER='${SHELL} /home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/build-aux/missing --run autoheader'
-AUTOMAKE='${SHELL} /home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/build-aux/missing --run automake-1.10'
+AUTOCONF='${SHELL} /home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/build-aux/missing --run autoconf'
+AUTOHEADER='${SHELL} /home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/build-aux/missing --run autoheader'
+AUTOMAKE='${SHELL} /home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/build-aux/missing --run automake-1.10'
 AUXDIR='build-aux'
 AWK='gawk'
 BITSIZEOF_PTRDIFF_T=''
@@ -10398,7 +10398,7 @@ LOCALE_ZH_CN='none'
 LTLIBICONV='-liconv'
 LTLIBINTL=''
 LTLIBOBJS=''
-MAKEINFO='${SHELL} /home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/build-aux/missing --run makeinfo'
+MAKEINFO='${SHELL} /home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/build-aux/missing --run makeinfo'
 MKINSTALLDIRS='$(top_builddir)/build-aux/mkinstalldirs'
 MSGFMT='/usr/bin/msgfmt'
 MSGFMT_015='/usr/bin/msgfmt'
@@ -10523,7 +10523,7 @@ host_vendor='pc'
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='$(SHELL) /home/joe/courses/11spring/user-in-the-loop/project/findutils-4.4.2/build-aux/install-sh'
+install_sh='$(SHELL) /home/joe/courses/11spring/user-in-the-loop/PlaceholderName/findutils-ours/build-aux/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'

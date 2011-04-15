@@ -83,14 +83,17 @@ static int process_path PARAMS((char *pathname, char *name, boolean leaf, char *
 static void process_dir PARAMS((char *pathname, char *name, int pathlen, const struct stat *statp, char *parent));
 
 
-int STOP_BEFORE_RECUR = 0;
+
+
 // XXX our crap
+int STOP_BEFORE_RECUR = 0;
+
 ourInterrupt(sig, code) 
 int sig, code;
 {
   STOP_BEFORE_RECUR = 1;
 }
-// end our crap
+// XXX end our crap
 
 
 /* Name this program was run with. */
@@ -137,7 +140,7 @@ main (int argc, char **argv)
   int i;
   int end_of_leading_options = 0; /* First arg after any -H/-L etc. */
   struct predicate *eval_tree;
-
+  // XXX: Ours
   signal(SIGTSTP, ourInterrupt);
 
   program_name = argv[0];
@@ -468,6 +471,8 @@ wd_sanity_check(const char *thing_to_stat,
   int silent = 0;
   const char *current_dir = ".";
   
+  printf("wd_sanity_check: progname = %s, what = %s\n", progname, what);
+
   *changed = false;
   
   set_stat_placeholders(newinfo);
@@ -588,6 +593,8 @@ safely_chdir_lstat(const char *dest,
   int tries = 0;
   enum WdSanityCheckFatality isfatal = RETRY_IF_SANITY_CHECK_FAILS;
   
+  printf("safely_chdir_lstat: dest = %s\n", dest);
+
   saved_errno = errno = 0;
 
   dotfd = open(".", O_RDONLY
@@ -807,6 +814,8 @@ safely_chdir_nofollow(const char *dest,
 {
   int extraflags, fd;
 
+  printf("safely_chdir_nofollow: dest = %s\n", dest);
+
   (void) direction;
   (void) statbuf_dest;
   
@@ -883,6 +892,8 @@ safely_chdir(const char *dest,
 {
   enum SafeChdirStatus result;
   
+  printf("safely_chdir: dest = %s\n", dest);
+
   /* We're about to leave a directory.  If there are any -execdir
    * argument lists which have been built but have not yet been
    * processed, do them now because they must be done in the same
@@ -926,6 +937,8 @@ chdir_back (void)
   struct stat stat_buf;
   boolean dummy;
   
+  printf("chdir_back\n");
+
   if (starting_desc < 0)
     {
       if (options.debug_options & DebugSearch)
@@ -980,6 +993,8 @@ at_top (char *pathname,
   int dirchange;
   char *parent_dir = dir_name (pathname);
   char *base = last_component (pathname);
+
+  printf("at_top: parent_dir: %s, base: %s\n", parent_dir, base);
 
   state.curdepth = 0;
   state.starting_path_length = strlen (pathname);
@@ -1172,6 +1187,8 @@ process_path (char *pathname, char *name, boolean leaf, char *parent,
   static dev_t root_dev;	/* Device ID of current argument pathname. */
   int i;
   struct predicate *eval_tree;
+
+  printf("process_path: pathname = %s, name = %s\n", pathname, name);
 
   eval_tree = get_eval_tree();
   /* Assume it is a non-directory initially. */
