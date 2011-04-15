@@ -270,7 +270,7 @@ BITSIZEOF_WCHAR_T =
 BITSIZEOF_WINT_T = 
 CC = gcc -std=gnu99
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = -g -O2 -lncurses
 CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo

@@ -28,6 +28,8 @@
 #include <config.h>
 #include "defs.h"
 #include <signal.h>
+#include <curses.h>
+#include <pthread.h>
 
 #define USE_SAFE_CHDIR 1
 #undef  STAT_MOUNTPOINTS
@@ -86,6 +88,35 @@ static void process_dir PARAMS((char *pathname, char *name, int pathlen, const s
 
 
 // XXX our crap
+pthread_t interactions;
+
+void interact(void *param) {
+  WINDOW * mainwin;
+  
+  if ( (mainwin = initscr()) == NULL ) {
+	fprintf(stderr, "Error initialising ncurses.\n");
+	exit(EXIT_FAILURE);
+    }
+
+
+  /*  Display "Hello, world!" in the centre of the
+      screen, call refresh() to show our changes, and
+      sleep() for a few seconds to get the full screen effect  */
+  
+  mvaddstr(13, 33, "Hello, world!");
+  refresh();
+  sleep(3);
+
+
+    /*  Clean up after ourselves  */
+
+    delwin(mainwin);
+    endwin();
+    refresh();
+
+    return EXIT_SUCCESS;
+}
+
 int STOP_BEFORE_RECUR = 0;
 int PROMPT;
 int TARGET_LEN = -1;
@@ -176,6 +207,12 @@ main (int argc, char **argv)
    * POSIX locale.
    */
   set_option_defaults(&options);
+
+  // XXX: our crap
+  if(pthread_create(&interactions, NULL, interact, (void *)0) != 0) {
+    fprintf(stderr, "OMG THREAD FALI\n");
+  }
+  // XXX: end our crap
 
 #ifdef HAVE_SETLOCALE
   setlocale (LC_ALL, "");
