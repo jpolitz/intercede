@@ -1,0 +1,123 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+
+\title{Reactive Gnu-Tools}
+
+\author{Jake Eakle \and Joe Politz}
+
+\begin{document}
+
+\maketitle
+
+\paragraph{Motivation}
+
+Gnu tools like {\tt cp}, {\tt scp}, and {\tt find} are inherently
+one-shot applications---they take a set of arguments and run to
+completion accepting no further input from the user.  They are often
+directed at large tasks, and time spent considering command line
+arguments and consulting man pages can take away from the processing
+time.  We propose several tweaks to common gnu filesystem tools to
+make them more interactive, with specific focus on letting users help
+the tool improve the efficiency of long tasks.
+
+Consider some use cases:
+
+\begin{itemize}
+\item A common case of {\tt find} is that a user downloads a file
+  \emph{somewhere} in a their home directory, and uses {\tt find}
+  (from the command line or through a GUI), to search the entire
+  directory for matching files.  Unless they are careful in their
+  specification of directories to search, {\tt find} could end up in a
+  costly search of obviously-incorrect directories, like the user's
+  {\tt Music} folder, which contains thousands of mp3's, but little
+  else of interest.  If the user had an interactive display of the
+  places {\tt find} was searching, they could tell {\tt find} to skip
+  certain directories.
+
+\item A user is using {\tt cp} or {\tt scp} to copy a large number of
+  files from one location to another, but can get back to their work
+  sooner if they copy some files \emph{first}.  The ordering of files
+  is opaque to the user and determined entirely by {\tt cp}.  Giving
+  the user an interface to decide \emph{which} files should be
+  transferred first, while the overall copy is ongoing, would be a
+  useful extension.
+\end{itemize}
+
+\section{Progress --- Interface Designs}
+
+\paragraph{Command Line}
+
+We've focused our attention on {\tt find} so far, and come to a few
+key points of interest.
+
+\begin{itemize}
+\item {\tt find} only provides feedback to users on files that are
+  actually found.  Our application demands constant feedback from the
+  application on the current path being searched.
+\item In some uses of {\tt find}, the output on {\tt stdout} is piped
+  to other applications, which conflicts with our goal of providing
+  users with constant feedback.  We've considered and tried solutions
+  involving interrupts and {\tt ncurses}, but don't have an entirely
+  satisfactory solution yet.
+\end{itemize}
+
+\paragraph{Graphical}
+
+[FILL]
+
+\section{Progress --- Implementation}
+
+We've spent time understanding {\tt find} and interposing our own code
+into its pipeline of work.  Unsurprisingly, the bulk of {\tt find}'s
+execution happens in a series of tight recursive calls, one of which
+contains a tighter inner loop that iterates over the items in a
+directory.  It is in this recursive process that we need to insert our
+stops, accept user input, and unroll the recursion to the appropriate
+level.
+
+At the moment, we have the following workflow implemented:
+
+\begin{enumerate}
+\item {\tt find} receives {\tt SIGTSTP}, which calls a handler that
+  sets a flag
+\item The next time the {\tt process\_path} function (which sits at
+  the top of the recursive call stack), is invoked, it checks this
+  flag and drops the user to a prompt.
+\item The user inputs the \emph{number of subdirectories} to jump up
+  in the stack.
+\item {\tt find} unrolls to the appropriate level without reporting
+  any further results, and then continues on with the next directory
+  entries in its implicit worklist.
+\end{enumerate}
+
+For example, here is a possible interaction:
+
+\begin{verbatim}
+> find /
+/bin/bash
+/bin/bunzip2
+/bin/busybox
+... (lots of output)
+/var/lib/gems/1.8/gems/activerecord-2.3.3/lib/active_record/locale/en.yml
+<program stops>
+Enter number to skip: 5 <enter>
+/var/lib/gems/1.8/gems/rack-1.0.0/...
+<searching continues>
+...
+\end{verbatim}
+
+\paragraph{Going Forward}
+
+This is an interim solution (though it still is moderately useful),
+until real-time feedback works well.  As noted above, we're looking
+into using {\tt ncurses} in a separate thread to control input and
+provide the user with feedback about what is currently being searched.
+
+Our investigation into {\tt find} and playing with the source taught
+us a lot about how gnu-tools work (and was part of the reason we were
+interested in the project).  Now that we understand the architecture
+of {\tt find} to some extent, we will have an easier time moving
+forward with other tools.
+
+\end{document}
