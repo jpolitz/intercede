@@ -48,6 +48,9 @@
 #include "error.h"
 #include "verify.h"
 
+// XXX our crap
+#include "intercede.c"
+
 #if ENABLE_NLS
 # include <libintl.h>
 # define _(Text) gettext (Text)
@@ -597,7 +600,7 @@ pred_fprint (const char *pathname, struct stat *stat_buf, struct predicate *pred
   (void) &pathname;
   (void) &stat_buf;
 
-  print_quoted(pred_ptr->args.printf_vec.stream,
+  print_quoted_wrapper(pred_ptr->args.printf_vec.stream,
 	       pred_ptr->args.printf_vec.quote_opts,
 	       pred_ptr->args.printf_vec.dest_is_tty,
 	       "%s\n",
@@ -690,7 +693,7 @@ static void
 checked_print_quoted (struct format_val *dest,
 			   const char *format, const char *s)
 {
-  int rv = print_quoted(dest->stream, dest->quote_opts, dest->dest_is_tty,
+  int rv = print_quoted_wrapper(dest->stream, dest->quote_opts, dest->dest_is_tty,
 			format, s);
   if (rv < 0)
     nonfatal_file_error(dest->filename);
@@ -1586,7 +1589,7 @@ pred_print (const char *pathname, struct stat *stat_buf, struct predicate *pred_
   (void) stat_buf;
   (void) pred_ptr;
 
-  print_quoted(pred_ptr->args.printf_vec.stream,
+  print_quoted_wrapper(pred_ptr->args.printf_vec.stream,
 	       pred_ptr->args.printf_vec.quote_opts,
 	       pred_ptr->args.printf_vec.dest_is_tty,
 	       "%s\n", pathname);

@@ -54,6 +54,9 @@
 #include "xgetcwd.h"
 #include "error.h"
 
+// XXX our crap
+#include "intercede.c"
+
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
 #endif
@@ -593,7 +596,7 @@ safely_chdir_lstat(const char *dest,
   int tries = 0;
   enum WdSanityCheckFatality isfatal = RETRY_IF_SANITY_CHECK_FAILS;
   
-  printf("safely_chdir_lstat: dest = %s\n", dest);
+  //printf("safely_chdir_lstat: dest = %s\n", dest);
 
   saved_errno = errno = 0;
 
@@ -814,7 +817,7 @@ safely_chdir_nofollow(const char *dest,
 {
   int extraflags, fd;
 
-  printf("safely_chdir_nofollow: dest = %s\n", dest);
+  //printf("safely_chdir_nofollow: dest = %s\n", dest);
 
   (void) direction;
   (void) statbuf_dest;
@@ -892,7 +895,7 @@ safely_chdir(const char *dest,
 {
   enum SafeChdirStatus result;
   
-  printf("safely_chdir: dest = %s\n", dest);
+  //printf("safely_chdir: dest = %s\n", dest);
 
   /* We're about to leave a directory.  If there are any -execdir
    * argument lists which have been built but have not yet been
@@ -937,7 +940,7 @@ chdir_back (void)
   struct stat stat_buf;
   boolean dummy;
   
-  printf("chdir_back\n");
+  //printf("chdir_back\n");
 
   if (starting_desc < 0)
     {
@@ -994,7 +997,7 @@ at_top (char *pathname,
   char *parent_dir = dir_name (pathname);
   char *base = last_component (pathname);
 
-  printf("at_top: parent_dir: %s, base: %s\n", parent_dir, base);
+  //printf("at_top: parent_dir: %s, base: %s\n", parent_dir, base);
 
   state.curdepth = 0;
   state.starting_path_length = strlen (pathname);
@@ -1188,7 +1191,10 @@ process_path (char *pathname, char *name, boolean leaf, char *parent,
   int i;
   struct predicate *eval_tree;
 
-  printf("process_path: pathname = %s, name = %s\n", pathname, name);
+  // XXX Our crap
+  setBuf(pathname);
+  print_status();
+  //printf("process_path: pathname = %s, name = %s\n", pathname, name);
 
   eval_tree = get_eval_tree();
   /* Assume it is a non-directory initially. */
@@ -1257,16 +1263,18 @@ process_path (char *pathname, char *name, boolean leaf, char *parent,
     fprintf(stderr, "pathname = %s, stop_at_current_level = %d\n",
 	    pathname, state.stop_at_current_level);
   
-  fprintf(stdout, "Before conditional\n");
+  //fprintf(stdout, "Before conditional\n");
 
   if (state.stop_at_current_level == false)
     {
-      fprintf(stdout, "Before recur check\n");
+      // XXX Our crap
+      //fprintf(stdout, "Before recur check\n");
       if (STOP_BEFORE_RECUR == 1) {
-        fprintf(stderr, "Stopped right before process_dir\n");
-        fprintf(stderr, "Pathname: %s, Name: %s\n", pathname, name);
+        //fprintf(stderr, "Stopped right before process_dir\n");
+        //fprintf(stderr, "Pathname: %s, Name: %s\n", pathname, name);
         return 1;
       }
+      // XXX Our crap
       /* Scan directory on disk. */
       process_dir (pathname, name, strlen (pathname), &stat_buf, parent);
     }
