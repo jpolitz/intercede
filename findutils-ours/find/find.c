@@ -145,6 +145,8 @@ main (int argc, char **argv)
   struct predicate *eval_tree;
   // XXX: Ours
   signal(SIGTSTP, ourInterrupt);
+  init_events();
+  // End Ours
 
   program_name = argv[0];
   state.exit_status = 0;
@@ -1191,9 +1193,14 @@ process_path (char *pathname, char *name, boolean leaf, char *parent,
   int i;
   struct predicate *eval_tree;
 
-  // XXX Our crap
   setBuf(pathname);
+  // XXX Our crap
+  if(poppingItUp()) {
+    return 1;
+  }
+
   print_status();
+
   //printf("process_path: pathname = %s, name = %s\n", pathname, name);
 
   eval_tree = get_eval_tree();

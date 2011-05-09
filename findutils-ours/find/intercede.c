@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <printquoted.h>
 #include <pthread.h>
+#include <termios.h>
 
 // Help came from:
 // http://ramprasadk.wordpress.com/2010/06/09/c-programming-linux-color-text-output/
@@ -15,6 +16,7 @@ pthread_t event_thread;
 char* buf;
 // Which chunk of the pathname should be highlighted right now
 int dirIndex;
+int targetIndex;
 
 static void setIndex(int newIx) {
   dirIndex = newIx;
@@ -40,6 +42,18 @@ static int depth(char *path) {
   return slashes;
 }
 
+static boolean poppingItUp() {
+  if(targetIndex == -1) {
+    return false;
+  }
+  if(depth(buf) > targetIndex) {
+    return true;
+  }
+  targetIndex = -1;
+  return false;
+}
+
+
 static int getIndex(char *path, int index) {
   int d = depth(path);
   if (index > (d - 1)) { return d - 1; }
@@ -61,31 +75,46 @@ static int decrementIndex() {
   dirIndex = getIndex(buf, newIx);
 }
 
+// Help from pianobar here
+static void makeInputUnbuffered() {
+  if(setvbuf (stdin, NULL, _IONBF, 1) == 0) {
+    printf("Success\n");
+  }
+  struct termios terminalOptions;
+  tcgetattr (fileno (stdin), &terminalOptions);
+
+  terminalOptions.c_lflag &= ~ICANON;
+}
+
 static void get_event(int *dirIx /* unused */) {
   fd_set set;
   char inChr;
   FD_ZERO(&set);
   FD_SET(0, &set);
   ssize_t chrs = 0;
-  setvbuf (stdin, NULL, _IONBF, 1); 
+  makeInputUnbuffered();
 
   printf("GetEvent called\n");
   while(1) {
-    /*    if(select(1, &set, NULL, NULL, NULL) <= 0) {
+    if(select(1, &set, NULL, NULL, NULL) <= 0) {
       fprintf(stderr, "Intercede: Terrible things happened waiting for input\n");
       fflush(stderr);
       break;
-      }*/
+    }
     if((chrs = read(0, &inChr, sizeof(inChr))) <= 0) {
       //fprintf(stderr, "Intercede: Terrible things happened reading input: %d\n", chrs);
       continue;      
     }
     //printf("DirIndex: %d\n", dirIndex);
+    fflush(stdout);
     if(inChr == 'l' || inChr == 'k') {
       incrementIndex();
     }
     else if(inChr == 'h' || inChr == 'j') {
       decrementIndex();
+    }
+    else if(inChr == 'x') {
+      targetIndex = dirIndex;
     }
     //printf("got: %c\n", inChr);
     fflush(stdout);
@@ -97,6 +126,7 @@ static void get_event(int *dirIx /* unused */) {
 static void init_events() {
   printf("Printing with dirIndex: %d, %d\n", &dirIndex, dirIndex);
   dirIndex = 2;
+  targetIndex = -1;
   printf("Printing with dirIndex: %d, %d\n", &dirIndex, dirIndex);  
   printf("Initting events\n");
   if(pthread_create(&event_thread, NULL, &get_event, (void *)(&dirIndex)) != 0) {
