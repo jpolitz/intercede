@@ -1,17 +1,27 @@
 #include <stdio.h>
 #include <printquoted.h>
+#include <pthread.h>
 
 // Help came from:
 // http://ramprasadk.wordpress.com/2010/06/09/c-programming-linux-color-text-output/
 #define _intercede_highlight "\033[7;30m"
 #define _intercede_clear "\033[0m"
 
+
+pthread_t event_thread;
+
+
+// Buffer that points to the current pathname to print
 char* buf;
-static int dirIndex;
+// Which chunk of the pathname should be highlighted right now
+int dirIndex;
+
+static void setIndex(int newIx) {
+  dirIndex = newIx;
+}
 
 static void setBuf(char* newBuf) {
   buf = newBuf;
-  dirIndex = 22;
 }
 
 // We measure by blocks between slashes... how accurate is this?
@@ -35,6 +45,66 @@ static int getIndex(char *path, int index) {
   if (index > (d - 1)) { return d - 1; }
   return index;
 }
+
+static int incrementIndex() {
+  int newIx = getIndex(buf, dirIndex + 1);
+  //printf("Updating ix to %d", newIx);
+  fflush(stdout);
+  dirIndex = newIx;
+}
+
+static int decrementIndex() {
+  int newIx = dirIndex - 1;
+  if (newIx < 0) {
+    dirIndex = 0;
+  }
+  dirIndex = getIndex(buf, newIx);
+}
+
+static void get_event(int *dirIx /* unused */) {
+  fd_set set;
+  char inChr;
+  FD_ZERO(&set);
+  FD_SET(0, &set);
+  ssize_t chrs = 0;
+  setvbuf (stdin, NULL, _IONBF, 1); 
+
+  printf("GetEvent called\n");
+  while(1) {
+    /*    if(select(1, &set, NULL, NULL, NULL) <= 0) {
+      fprintf(stderr, "Intercede: Terrible things happened waiting for input\n");
+      fflush(stderr);
+      break;
+      }*/
+    if((chrs = read(0, &inChr, sizeof(inChr))) <= 0) {
+      //fprintf(stderr, "Intercede: Terrible things happened reading input: %d\n", chrs);
+      continue;      
+    }
+    //printf("DirIndex: %d\n", dirIndex);
+    if(inChr == 'l' || inChr == 'k') {
+      incrementIndex();
+    }
+    else if(inChr == 'h' || inChr == 'j') {
+      decrementIndex();
+    }
+    //printf("got: %c\n", inChr);
+    fflush(stdout);
+  }
+  printf("Exited loop\n");
+  fflush(stdout);
+}
+
+static void init_events() {
+  printf("Printing with dirIndex: %d, %d\n", &dirIndex, dirIndex);
+  dirIndex = 2;
+  printf("Printing with dirIndex: %d, %d\n", &dirIndex, dirIndex);  
+  printf("Initting events\n");
+  if(pthread_create(&event_thread, NULL, &get_event, (void *)(&dirIndex)) != 0) {
+    fprintf(stderr, "Intercede: couldn't create listener thread");
+    exit(1);
+  }
+}
+
 
 // Print the path with the chunk indicated by index highlighted.
 // Don't highlight the bit after the last slash if index is greater than
@@ -122,4 +192,5 @@ static int print_quoted_wrapper(FILE *stream,
   print_status();
   return ret;
 }
+
 
