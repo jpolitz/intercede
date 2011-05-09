@@ -91,6 +91,10 @@ static void process_dir PARAMS((char *pathname, char *name, int pathlen, const s
 // XXX our crap
 int STOP_BEFORE_RECUR = 0;
 
+void cleanup(int sig, int code) {
+  cleanupTerminal();
+}
+
 void ourInterrupt(sig, code) 
 int sig, code;
 {
@@ -145,6 +149,7 @@ main (int argc, char **argv)
   struct predicate *eval_tree;
   // XXX: Ours
   signal(SIGTSTP, ourInterrupt);
+  signal(SIGINT, cleanup);
   init_events();
   // End Ours
 

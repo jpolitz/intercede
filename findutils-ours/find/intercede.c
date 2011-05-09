@@ -75,14 +75,21 @@ static int decrementIndex() {
   dirIndex = getIndex(buf, newIx);
 }
 
+struct termios savedOptions;
+
 // Help from pianobar here
 static void makeInputUnbuffered() {
   struct termios terminalOptions;
   tcgetattr (fileno (stdin), &terminalOptions);
+  tcgetattr (fileno (stdin), &savedOptions);
   terminalOptions.c_lflag &= ~ICANON;
   terminalOptions.c_lflag &= ~ECHO;
   setvbuf (stdin, NULL, _IONBF, 1);
   tcsetattr(fileno (stdin), TCSANOW, &terminalOptions);
+}
+
+static void cleanupTerminal() {
+  tcsetattr(fileno (stdin), TCSANOW, &saveOptions);
 }
 
 static void get_event(int *dirIx /* unused */) {
