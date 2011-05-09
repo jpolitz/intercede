@@ -77,13 +77,12 @@ static int decrementIndex() {
 
 // Help from pianobar here
 static void makeInputUnbuffered() {
-  if(setvbuf (stdin, NULL, _IONBF, 1) == 0) {
-    printf("Success\n");
-  }
   struct termios terminalOptions;
   tcgetattr (fileno (stdin), &terminalOptions);
-
   terminalOptions.c_lflag &= ~ICANON;
+  terminalOptions.c_lflag &= ~ECHO;
+  setvbuf (stdin, NULL, _IONBF, 1);
+  tcsetattr(fileno (stdin), TCSANOW, &terminalOptions);
 }
 
 static void get_event(int *dirIx /* unused */) {
