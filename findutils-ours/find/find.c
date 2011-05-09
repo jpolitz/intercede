@@ -91,7 +91,7 @@ static void process_dir PARAMS((char *pathname, char *name, int pathlen, const s
 // XXX our crap
 int STOP_BEFORE_RECUR = 0;
 
-ourInterrupt(sig, code) 
+void ourInterrupt(sig, code) 
 int sig, code;
 {
   STOP_BEFORE_RECUR = 1;
