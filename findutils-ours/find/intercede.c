@@ -11,6 +11,20 @@ static int dirIndex;
 
 static void setBuf(char* newBuf) {
   buf = newBuf;
+  dirIndex = 0;
+}
+
+static int depth(char *path) {
+  int len = strlen(path);
+  int slashes = 0;
+
+  for(int i = 0; i < len; i++) {
+    if(path[i] == '/') {
+      slashes++;
+    }
+  }
+
+  return slashes;
 }
 
 static int print_quoted_wrapper(FILE *stream, 
@@ -20,8 +34,7 @@ static int print_quoted_wrapper(FILE *stream,
 				const char *path) {
   printf("\033[2K");
   int ret = print_quoted(stream, opts, is_tty, str, path);
-  printf("%s\r", buf);
-  fflush(stdout);
+  print_status();
   return ret;
 }
 
