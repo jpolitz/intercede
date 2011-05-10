@@ -91,8 +91,9 @@ static void process_dir PARAMS((char *pathname, char *name, int pathlen, const s
 // XXX our crap
 int STOP_BEFORE_RECUR = 0;
 
-void cleanup(int sig, int code) {
+void cleanupTerm(int sig, int code) {
   cleanupTerminal();
+  exit(1);
 }
 
 void ourInterrupt(sig, code) 
@@ -149,7 +150,7 @@ main (int argc, char **argv)
   struct predicate *eval_tree;
   // XXX: Ours
   signal(SIGTSTP, ourInterrupt);
-  signal(SIGINT, cleanup);
+  signal(SIGINT, cleanupTerm);
   init_events();
   // End Ours
 
@@ -254,6 +255,7 @@ main (int argc, char **argv)
    */
   show_success_rates(eval_tree);
   cleanup();
+  cleanupTerm(0,0);
   return state.exit_status;
 }
 

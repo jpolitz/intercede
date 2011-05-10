@@ -89,7 +89,7 @@ static void makeInputUnbuffered() {
 }
 
 static void cleanupTerminal() {
-  tcsetattr(fileno (stdin), TCSANOW, &saveOptions);
+  tcsetattr(fileno (stdin), TCSANOW, &savedOptions);
 }
 
 static void get_event(int *dirIx /* unused */) {
@@ -208,6 +208,7 @@ static int print_with_highlight(char *path, int index) {
 	 highlight, 
 	 _intercede_clear, 
 	 afterHighlight); 
+  fflush(stdout);
 }
 
 static int print_status() {
