@@ -357,6 +357,7 @@ cancel_clicked (GtkWidget *button,
 {
 	print("Cancel clicked");
 	nautilus_progress_info_cancel (data->info);
+	nautilus_progress_info_resume (data->info);
 	gtk_widget_set_sensitive (button, FALSE);
 }
 
@@ -396,12 +397,31 @@ static void
 pause_clicked (GtkWidget *button,
 	       ProgressWidgetData *data)
 {
+
+	GtkWidget *imagePause;
+
 	if(nautilus_progress_info_get_is_paused (data->info)) {
+		gtk_button_set_image(button, imagePause);
+
+		imagePause = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PAUSE,
+					       GTK_ICON_SIZE_BUTTON);
+
+		gtk_button_set_image(button, imagePause);
+
 		nautilus_progress_info_resume (data->info);
+
+
 	}
 	else {
+		imagePause = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PLAY,
+					       GTK_ICON_SIZE_BUTTON);
+
+		gtk_button_set_image(button, imagePause);
+
 		nautilus_progress_info_pause (data->info);
 	}
+	gtk_widget_show_all (data->widget);
+
 }
 
 static void
@@ -476,7 +496,7 @@ progress_widget_new (NautilusProgressInfo *info)
 			   TRUE,TRUE,
 			   0);
 	
-	imagePause = gtk_image_new_from_stock (GTK_STOCK_CANCEL,
+	imagePause = gtk_image_new_from_stock (GTK_STOCK_MEDIA_PAUSE,
 					       GTK_ICON_SIZE_BUTTON);
 	buttonPause = gtk_button_new ();
 	gtk_container_add (GTK_CONTAINER (buttonPause), imagePause);
