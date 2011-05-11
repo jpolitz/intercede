@@ -1,0 +1,86 @@
+<!-- ##### SECTION Title ##### -->
+nautilus-menu-provider
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### STRUCT NautilusMenuProvider ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL NautilusMenuProvider::items-updated ##### -->
+<para>
+
+</para>
+
+@nautilusmenuprovider: the object which received the signal.
+
+<!-- ##### STRUCT NautilusMenuProviderIface ##### -->
+<para>
+
+</para>
+
+@g_iface: 
+@get_file_items: 
+@get_background_items: 
+@get_toolbar_items: 
+
+<!-- ##### FUNCTION nautilus_menu_provider_get_file_items ##### -->
+<para>
+
+</para>
+
+@provider: 
+@window: 
+@files: 
+@Returns: 
+
+
+<!-- ##### FUNCTION nautilus_menu_provider_get_background_items ##### -->
+<para>
+
+</para>
+
+@provider: 
+@window: 
+@current_folder: 
+@Returns: 
+
+
+<!-- ##### FUNCTION nautilus_menu_provider_get_toolbar_items ##### -->
+<para>
+
+</para>
+
+@provider: 
+@window: 
+@current_folder: 
+@Returns: 
+
+
+<!-- ##### FUNCTION nautilus_menu_provider_emit_items_updated_signal ##### -->
+<para>
+
+</para>
+
+@provider: 
+
+

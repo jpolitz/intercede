@@ -1,0 +1,6 @@
+nautilus-default-file-icon.lo: nautilus-default-file-icon.c ../config.h \
+ nautilus-default-file-icon.h
+
+../config.h:
+
+nautilus-default-file-icon.h:

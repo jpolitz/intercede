@@ -1,0 +1,12 @@
+prefix=/home/joe
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+extensiondir=${exec_prefix}/lib/nautilus/extensions-2.0
+
+Name: libnautilus-extension
+Description: A library to create Nautilus view extensions
+Version: 2.32.2.1
+Requires: glib-2.0 gtk+-2.0
+Libs: ${pc_top_builddir}/${pcfiledir}/libnautilus-extension.la
+Cflags: -I${pc_top_builddir}/${pcfiledir}/..

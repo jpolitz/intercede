@@ -1,0 +1,76 @@
+<!-- ##### SECTION Title ##### -->
+NautilusColumn
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### STRUCT NautilusColumnDetails ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT NautilusColumn ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG NautilusColumn:attribute ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusColumn:attribute-q ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusColumn:description ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusColumn:label ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusColumn:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusColumn:xalign ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION nautilus_column_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@attribute: 
+@label: 
+@description: 
+@Returns: 
+
+

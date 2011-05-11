@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>nautilus-menu-provider</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Nautilus Extension Reference Manual">
+<link rel="up" href="ch01.html" title="Extension Interfaces">
+<link rel="prev" href="libnautilus-extension-nautilus-location-widget-provider.html" title="nautilus-location-widget-provider">
+<link rel="next" href="libnautilus-extension-nautilus-menu.html" title="NautilusMenuItem">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libnautilus-extension-nautilus-location-widget-provider.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Nautilus Extension Reference Manual</th>
+<td><a accesskey="n" href="libnautilus-extension-nautilus-menu.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libnautilus-extension-nautilus-menu-provider.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libnautilus-extension-nautilus-menu-provider.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#libnautilus-extension-nautilus-menu-provider.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#libnautilus-extension-nautilus-menu-provider.prerequisites" class="shortcut">Prerequisites</a>
+                   | 
+                  <a href="#libnautilus-extension-nautilus-menu-provider.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" title="nautilus-menu-provider">
+<a name="libnautilus-extension-nautilus-menu-provider"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libnautilus-extension-nautilus-menu-provider.top_of_page"></a>nautilus-menu-provider</span></h2>
+<p>nautilus-menu-provider</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libnautilus-extension-nautilus-menu-provider.synopsis"></a><h2>Synopsis</h2>
+<a name="NautilusMenuProvider"></a><pre class="synopsis">                    <a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider-struct" title="NautilusMenuProvider">NautilusMenuProvider</a>;
+struct              <a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProviderIface" title="struct NautilusMenuProviderIface">NautilusMenuProviderIface</a>;
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="libnautilus-extension-nautilus-menu-provider.html#nautilus-menu-provider-get-file-items" title="nautilus_menu_provider_get_file_items ()">nautilus_menu_provider_get_file_items</a>
+                                                        (<em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider"><span class="type">NautilusMenuProvider</span></a> *provider</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *window</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *files</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="libnautilus-extension-nautilus-menu-provider.html#nautilus-menu-provider-get-background-items" title="nautilus_menu_provider_get_background_items ()">nautilus_menu_provider_get_background_items</a>
+                                                        (<em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider"><span class="type">NautilusMenuProvider</span></a> *provider</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *window</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-file-info.html#NautilusFileInfo"><span class="type">NautilusFileInfo</span></a> *current_folder</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="libnautilus-extension-nautilus-menu-provider.html#nautilus-menu-provider-get-toolbar-items" title="nautilus_menu_provider_get_toolbar_items ()">nautilus_menu_provider_get_toolbar_items</a>
+                                                        (<em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider"><span class="type">NautilusMenuProvider</span></a> *provider</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *window</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-file-info.html#NautilusFileInfo"><span class="type">NautilusFileInfo</span></a> *current_folder</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libnautilus-extension-nautilus-menu-provider.html#nautilus-menu-provider-emit-items-updated-signal" title="nautilus_menu_provider_emit_items_updated_signal ()">nautilus_menu_provider_emit_items_updated_signal</a>
+                                                        (<em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider"><span class="type">NautilusMenuProvider</span></a> *provider</code></em>);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="libnautilus-extension-nautilus-menu-provider.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GInterface
+   +----NautilusMenuProvider
+</pre>
+</div>
+<div class="refsect1" title="Prerequisites">
+<a name="libnautilus-extension-nautilus-menu-provider.prerequisites"></a><h2>Prerequisites</h2>
+<p>
+NautilusMenuProvider requires
+ <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>.</p>
+</div>
+<div class="refsect1" title="Signals">
+<a name="libnautilus-extension-nautilus-menu-provider.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider-items-updated" title='The "items-updated" signal'>items-updated</a>"                                  : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libnautilus-extension-nautilus-menu-provider.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libnautilus-extension-nautilus-menu-provider.details"></a><h2>Details</h2>
+<div class="refsect2" title="NautilusMenuProvider">
+<a name="NautilusMenuProvider-struct"></a><h3>NautilusMenuProvider</h3>
+<pre class="programlisting">typedef struct _NautilusMenuProvider NautilusMenuProvider;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="struct NautilusMenuProviderIface">
+<a name="NautilusMenuProviderIface"></a><h3>struct NautilusMenuProviderIface</h3>
+<pre class="programlisting">struct NautilusMenuProviderIface {
+	GTypeInterface g_iface;
+
+	GList *(*get_file_items)       (NautilusMenuProvider *provider,
+					GtkWidget            *window,
+					GList                *files);
+	GList *(*get_background_items) (NautilusMenuProvider *provider,
+					GtkWidget            *window,
+					NautilusFileInfo     *current_folder);
+	GList *(*get_toolbar_items)    (NautilusMenuProvider *provider,
+					GtkWidget            *window,
+				        NautilusFileInfo     *current_folder);
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="nautilus_menu_provider_get_file_items ()">
+<a name="nautilus-menu-provider-get-file-items"></a><h3>nautilus_menu_provider_get_file_items ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             nautilus_menu_provider_get_file_items
+                                                        (<em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider"><span class="type">NautilusMenuProvider</span></a> *provider</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *window</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *files</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="nautilus_menu_provider_get_background_items ()">
+<a name="nautilus-menu-provider-get-background-items"></a><h3>nautilus_menu_provider_get_background_items ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             nautilus_menu_provider_get_background_items
+                                                        (<em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider"><span class="type">NautilusMenuProvider</span></a> *provider</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *window</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-file-info.html#NautilusFileInfo"><span class="type">NautilusFileInfo</span></a> *current_folder</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="nautilus_menu_provider_get_toolbar_items ()">
+<a name="nautilus-menu-provider-get-toolbar-items"></a><h3>nautilus_menu_provider_get_toolbar_items ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             nautilus_menu_provider_get_toolbar_items
+                                                        (<em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider"><span class="type">NautilusMenuProvider</span></a> *provider</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a> *window</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-file-info.html#NautilusFileInfo"><span class="type">NautilusFileInfo</span></a> *current_folder</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="nautilus_menu_provider_emit_items_updated_signal ()">
+<a name="nautilus-menu-provider-emit-items-updated-signal"></a><h3>nautilus_menu_provider_emit_items_updated_signal ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                nautilus_menu_provider_emit_items_updated_signal
+                                                        (<em class="parameter"><code><a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider"><span class="type">NautilusMenuProvider</span></a> *provider</code></em>);</pre>
+<p>
+</p>
+</div>
+</div>
+<div class="refsect1" title="Signal Details">
+<a name="libnautilus-extension-nautilus-menu-provider.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" title='The "items-updated" signal'>
+<a name="NautilusMenuProvider-items-updated"></a><h3>The <code class="literal">"items-updated"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="libnautilus-extension-nautilus-menu-provider.html#NautilusMenuProvider"><span class="type">NautilusMenuProvider</span></a> *nautilusmenuprovider,
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>              user_data)                 : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a></pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>nautilusmenuprovider</code></em> :</span></p></td>
+<td>the object which received the signal.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.15</div>
+</body>
+</html>

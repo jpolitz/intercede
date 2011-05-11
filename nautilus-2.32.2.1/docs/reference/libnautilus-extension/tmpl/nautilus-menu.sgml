@@ -1,0 +1,208 @@
+<!-- ##### SECTION Title ##### -->
+NautilusMenuItem
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### MACRO NAUTILUS_TYPE_MENU_ITEM ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO NAUTILUS_MENU_ITEM ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO NAUTILUS_MENU_ITEM_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+
+<!-- ##### MACRO NAUTILUS_MENU_IS_ITEM ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO NAUTILUS_MENU_IS_ITEM_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+
+<!-- ##### MACRO NAUTILUS_MENU_ITEM_GET_CLASS ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### STRUCT NautilusMenuPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT NautilusMenuItemDetails ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT NautilusMenu ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT NautilusMenuItem ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL NautilusMenuItem::activate ##### -->
+<para>
+
+</para>
+
+@nautilusmenuitem: the object which received the signal.
+
+<!-- ##### ARG NautilusMenuItem:icon ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusMenuItem:label ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusMenuItem:menu ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusMenuItem:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusMenuItem:priority ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusMenuItem:sensitive ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusMenuItem:tip ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION nautilus_menu_new ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### FUNCTION nautilus_menu_append_item ##### -->
+<para>
+
+</para>
+
+@menu: 
+@item: 
+
+
+<!-- ##### FUNCTION nautilus_menu_get_items ##### -->
+<para>
+
+</para>
+
+@menu: 
+@Returns: 
+
+
+<!-- ##### FUNCTION nautilus_menu_item_list_free ##### -->
+<para>
+
+</para>
+
+@item_list: 
+
+
+<!-- ##### FUNCTION nautilus_menu_item_get_type ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### FUNCTION nautilus_menu_item_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@label: 
+@tip: 
+@icon: 
+@Returns: 
+
+
+<!-- ##### FUNCTION nautilus_menu_item_activate ##### -->
+<para>
+
+</para>
+
+@item: 
+
+
+<!-- ##### FUNCTION nautilus_menu_item_set_submenu ##### -->
+<para>
+
+</para>
+
+@item: 
+@menu: 
+
+

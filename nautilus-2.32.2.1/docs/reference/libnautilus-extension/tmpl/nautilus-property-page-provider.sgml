@@ -1,0 +1,46 @@
+<!-- ##### SECTION Title ##### -->
+nautilus-property-page-provider
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### STRUCT NautilusPropertyPageProvider ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT NautilusPropertyPageProviderIface ##### -->
+<para>
+
+</para>
+
+@g_iface: 
+@get_pages: 
+
+<!-- ##### FUNCTION nautilus_property_page_provider_get_pages ##### -->
+<para>
+
+</para>
+
+@provider: 
+@files: 
+@Returns: 
+
+

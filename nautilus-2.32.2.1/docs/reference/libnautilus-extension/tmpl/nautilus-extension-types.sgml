@@ -1,0 +1,78 @@
+<!-- ##### SECTION Title ##### -->
+nautilus-extension-types
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### MACRO NAUTILUS_TYPE_OPERATION_RESULT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT NautilusOperationHandle ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ENUM NautilusOperationResult ##### -->
+<para>
+
+</para>
+
+@NAUTILUS_OPERATION_COMPLETE: 
+@NAUTILUS_OPERATION_FAILED: 
+@NAUTILUS_OPERATION_IN_PROGRESS: 
+
+<!-- ##### FUNCTION nautilus_operation_result_get_type ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### FUNCTION nautilus_module_initialize ##### -->
+<para>
+
+</para>
+
+@module: 
+
+
+<!-- ##### FUNCTION nautilus_module_shutdown ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### FUNCTION nautilus_module_list_types ##### -->
+<para>
+
+</para>
+
+@types: 
+@num_types: 
+
+

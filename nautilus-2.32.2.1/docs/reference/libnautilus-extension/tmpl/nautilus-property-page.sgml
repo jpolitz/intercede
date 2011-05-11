@@ -1,0 +1,60 @@
+<!-- ##### SECTION Title ##### -->
+NautilusPropertyPage
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### STRUCT NautilusPropertyPageDetails ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT NautilusPropertyPage ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG NautilusPropertyPage:label ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusPropertyPage:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG NautilusPropertyPage:page ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION nautilus_property_page_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@label: 
+@page: 
+@Returns: 
+
+

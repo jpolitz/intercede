@@ -1,0 +1,6 @@
+nautilus-self-check-functions.o: nautilus-self-check-functions.c \
+ ../config.h nautilus-self-check-functions.h
+
+../config.h:
+
+nautilus-self-check-functions.h:
