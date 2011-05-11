@@ -131,11 +131,8 @@ static void get_event(int *dirIx /* unused */) {
 }
 
 static void init_events() {
-  printf("Printing with dirIndex: %d, %d\n", &dirIndex, dirIndex);
   dirIndex = 2;
   targetIndex = -1;
-  printf("Printing with dirIndex: %d, %d\n", &dirIndex, dirIndex);  
-  printf("Initting events\n");
   if(pthread_create(&event_thread, NULL, &get_event, (void *)(&dirIndex)) != 0) {
     fprintf(stderr, "Intercede: couldn't create listener thread");
     exit(1);
@@ -167,26 +164,20 @@ static int print_with_highlight(char *path, int index) {
     return 0;
   }
 
-  //  printf("%s, index is %d\n", path, ix);
   fflush(stdout);
 
   while(ix >= found + 1) {
     pathIndex = strchr(pathIndex, '/');
-    //    printf("path: %s\n", pathIndex);
     pathIndex++;
     found++;
   }
 
-  //  printf("%s is the rest\n", pathIndex);
   fflush(stdout);
 
   restIndex = strchr(pathIndex, '/');
 
   offsetFirst = strlen(path) - strlen(pathIndex);
   offsetLast = strlen(path) - strlen(restIndex);
-
-  //  printf("offsetFirst = %d\n", offsetFirst);
-  //  printf("offsetLast = %d\n", offsetLast);
 
   char beforeHighlight[offsetFirst + 1];
   char highlight[offsetLast - offsetFirst + 1];
@@ -199,32 +190,50 @@ static int print_with_highlight(char *path, int index) {
   strncpy(highlight, pathIndex, offsetLast - offsetFirst);
   strncpy(afterHighlight, restIndex, strlen(path) - offsetLast);
 
-  /*  printf("before: %s\n", beforeHighlight);
-  printf("high: %s\n", highlight);
-  printf("after: %s\n", afterHighlight); */
-
   /** Check the terminal size to make sure that we will get our 
       carriage return in, and not cause odd output */
   struct winsize w;
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
+  struct quoting_options *opts = clone_quoting_options(NULL);
+
   unsigned short cols = w.ws_col;
   char outstr[cols];
-  snprintf(outstr, (size_t) (cols - 1), "%s%s%s%s%s", 
-           beforeHighlight, 
-           _intercede_highlight, 
-           highlight, 
-           _intercede_clear, 
-           afterHighlight);
-  strcat(outstr, "\r");
-  printf(outstr);
-  /*
-  printf("%s%s%s%s%s\r", 
-	 beforeHighlight, 
-	 _intercede_highlight, 
-	 highlight, 
-	 _intercede_clear, 
-	 afterHighlight); */
+  //  snprintf(outstr, (size_t) (cols - 1), "%s%s%s%s%s", 
+  //       beforeHighlight, 
+  //       _intercede_highlight, 
+  //       highlight, 
+  //       _intercede_clear, 
+  //       afterHighlight);
+  //strcat(outstr, "\r");
+
+  if(strlen(beforeHighlight) > (cols - 1)) {
+    snprintf(outstr, (size_t) (cols - 1), "%s", beforeHighlight);
+    print_quoted(stdout, opts, true, "%s\r", outstr);
+  }
+  else {
+    print_quoted(stdout, opts, true, "%s", beforeHighlight);
+    printf("%s", _intercede_highlight);
+    if(strlen(highlight) + strlen(beforeHighlight) > (cols - 1)) {
+      snprintf(outstr, (size_t) (cols - 1 - strlen(beforeHighlight)), 
+               "%s", highlight);
+      print_quoted(stdout, opts, true, "%s\r", outstr);
+    }
+    else {
+      print_quoted(stdout, opts, true, "%s", highlight);
+      printf("%s", _intercede_clear);
+      if(strlen(highlight) + strlen(beforeHighlight) +
+         strlen(afterHighlight) > (cols - 1)) {
+        snprintf(outstr, (size_t) (cols - 1 - strlen(beforeHighlight) - 
+                                   strlen(highlight)), 
+                 "%s", afterHighlight);
+        print_quoted(stdout, opts, true, "%s\r", outstr);
+      }
+      else {
+        print_quoted(stdout, opts, true, "%s\r", afterHighlight);
+      }
+    }
+  }
   fflush(stdout);
 }
 
@@ -246,5 +255,3 @@ static int print_quoted_wrapper(FILE *stream,
   print_status();
   return ret;
 }
-
-
