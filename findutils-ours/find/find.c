@@ -91,7 +91,12 @@ static void process_dir PARAMS((char *pathname, char *name, int pathlen, const s
 // XXX our crap
 int STOP_BEFORE_RECUR = 0;
 
-ourInterrupt(sig, code) 
+void cleanupTerm(int sig, int code) {
+  cleanupTerminal();
+  exit(1);
+}
+
+void ourInterrupt(sig, code) 
 int sig, code;
 {
   STOP_BEFORE_RECUR = 1;
@@ -145,6 +150,9 @@ main (int argc, char **argv)
   struct predicate *eval_tree;
   // XXX: Ours
   signal(SIGTSTP, ourInterrupt);
+  signal(SIGINT, cleanupTerm);
+  init_events();
+  // End Ours
 
   program_name = argv[0];
   state.exit_status = 0;
@@ -247,6 +255,7 @@ main (int argc, char **argv)
    */
   show_success_rates(eval_tree);
   cleanup();
+  cleanupTerm(0,0);
   return state.exit_status;
 }
 
@@ -1191,9 +1200,14 @@ process_path (char *pathname, char *name, boolean leaf, char *parent,
   int i;
   struct predicate *eval_tree;
 
-  // XXX Our crap
   setBuf(pathname);
+  // XXX Our crap
+  if(poppingItUp()) {
+    return 1;
+  }
+
   print_status();
+
   //printf("process_path: pathname = %s, name = %s\n", pathname, name);
 
   eval_tree = get_eval_tree();
