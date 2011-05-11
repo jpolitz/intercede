@@ -2,6 +2,7 @@
 #include <printquoted.h>
 #include <pthread.h>
 #include <termios.h>
+#include <sys/ioctl.h>
 
 // Help came from:
 // http://ramprasadk.wordpress.com/2010/06/09/c-programming-linux-color-text-output/
@@ -202,12 +203,28 @@ static int print_with_highlight(char *path, int index) {
   printf("high: %s\n", highlight);
   printf("after: %s\n", afterHighlight); */
 
+  /** Check the terminal size to make sure that we will get our 
+      carriage return in, and not cause odd output */
+  struct winsize w;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+
+  unsigned short cols = w.ws_col;
+  char outstr[cols];
+  snprintf(outstr, (size_t) (cols - 1), "%s%s%s%s%s", 
+           beforeHighlight, 
+           _intercede_highlight, 
+           highlight, 
+           _intercede_clear, 
+           afterHighlight);
+  strcat(outstr, "\r");
+  printf(outstr);
+  /*
   printf("%s%s%s%s%s\r", 
 	 beforeHighlight, 
 	 _intercede_highlight, 
 	 highlight, 
 	 _intercede_clear, 
-	 afterHighlight); 
+	 afterHighlight); */
   fflush(stdout);
 }
 

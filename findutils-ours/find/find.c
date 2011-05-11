@@ -1201,12 +1201,9 @@ process_path (char *pathname, char *name, boolean leaf, char *parent,
   struct predicate *eval_tree;
 
   setBuf(pathname);
-  // XXX Our crap
-  if(poppingItUp()) {
-    return 1;
+  if(!poppingItUp()) {
+    print_status();
   }
-
-  print_status();
 
   //printf("process_path: pathname = %s, name = %s\n", pathname, name);
 
@@ -1278,6 +1275,12 @@ process_path (char *pathname, char *name, boolean leaf, char *parent,
 	    pathname, state.stop_at_current_level);
   
   //fprintf(stdout, "Before conditional\n");
+
+  // XXX Our crap
+  if(poppingItUp()) {
+    return 1;
+  }
+
 
   if (state.stop_at_current_level == false)
     {
