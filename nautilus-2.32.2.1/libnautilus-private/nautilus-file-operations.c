@@ -2892,8 +2892,8 @@ report_copy_progress (CopyMoveJob *copy_job,
 										 "Moving %'d files (in \"%B\") to \"%B\"",
 										 files_left)
 								       :
-								       ngettext ("Copying foodly %'d file (in \"%B\") to \"%B\"",
-										 "Copying foodly %'d files (in \"%B\") to \"%B\"",
+								       ngettext ("Copying %'d file (in \"%B\") to \"%B\"",
+										 "Copying %'d files (in \"%B\") to \"%B\"",
 										 files_left),
 								       files_left,
 								       (GFile *)copy_job->files->data,
@@ -3729,9 +3729,9 @@ copy_file_progress_callback (goffset current_num_bytes,
 	CommonJob *cjob = (CommonJob *) (pdata->job);
 	NautilusProgressInfo *info = cjob->progress;
 	
-	/*	while(nautilus_progress_info_get_is_paused (info)) {
+	while(nautilus_progress_info_get_is_paused (info)) {
 		usleep(1000);
-		}*/
+	}
 
 	new_size = current_num_bytes - pdata->last_size;
 

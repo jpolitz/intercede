@@ -45,7 +45,15 @@ find.o: find.c ../config.h defs.h /usr/include/sys/types.h \
  ../gnulib/lib/xalloc.h ../gnulib/lib/human.h ../gnulib/lib/xstrtol.h \
  ../gnulib/lib/canonicalize.h ../lib/modetype.h ../gnulib/lib/closein.h \
  ../lib/savedirinfo.h ../gnulib/lib/dirname.h ../gnulib/lib/quote.h \
- ../gnulib/lib/xgetcwd.h ../gnulib/lib/error.h /usr/include/locale.h \
+ ../gnulib/lib/xgetcwd.h ../gnulib/lib/error.h intercede.c \
+ ../lib/printquoted.h /usr/include/pthread.h /usr/include/sched.h \
+ /usr/include/bits/sched.h /usr/include/bits/setjmp.h \
+ /usr/include/termios.h /usr/include/bits/termios.h \
+ /usr/include/sys/ttydefaults.h /usr/include/sys/ioctl.h \
+ /usr/include/bits/ioctls.h /usr/include/asm/ioctls.h \
+ /usr/include/asm-generic/ioctls.h /usr/include/linux/ioctl.h \
+ /usr/include/asm/ioctl.h /usr/include/asm-generic/ioctl.h \
+ /usr/include/bits/ioctl-types.h /usr/include/locale.h \
  /usr/include/bits/locale.h /usr/include/libintl.h
 
 ../config.h:
@@ -259,6 +267,40 @@ defs.h:
 ../gnulib/lib/xgetcwd.h:
 
 ../gnulib/lib/error.h:
+
+intercede.c:
+
+../lib/printquoted.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/setjmp.h:
+
+/usr/include/termios.h:
+
+/usr/include/bits/termios.h:
+
+/usr/include/sys/ttydefaults.h:
+
+/usr/include/sys/ioctl.h:
+
+/usr/include/bits/ioctls.h:
+
+/usr/include/asm/ioctls.h:
+
+/usr/include/asm-generic/ioctls.h:
+
+/usr/include/linux/ioctl.h:
+
+/usr/include/asm/ioctl.h:
+
+/usr/include/asm-generic/ioctl.h:
+
+/usr/include/bits/ioctl-types.h:
 
 /usr/include/locale.h:
 

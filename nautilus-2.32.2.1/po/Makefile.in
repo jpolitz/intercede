@@ -36,7 +36,7 @@ libdir = ${exec_prefix}/lib
 DATADIRNAME = share
 itlocaledir = $(prefix)/$(DATADIRNAME)/locale
 subdir = po
-install_sh = ${SHELL} /home/joe/src/nautilus-2.32.2.1/install-sh
+install_sh = ${SHELL} /home/joe/courses/11spring/user-in-the-loop/PlaceholderName/nautilus-2.32.2.1/install-sh
 # Automake >= 1.8 provides /bin/mkdir -p.
 # Until it can be supposed, use the safe fallback:
 mkdir_p = $(install_sh) -d

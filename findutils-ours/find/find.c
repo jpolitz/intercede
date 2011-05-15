@@ -1202,7 +1202,7 @@ process_path (char *pathname, char *name, boolean leaf, char *parent,
 
   setBuf(pathname);
   if(!poppingItUp()) {
-    print_status();
+    print_status(false);
   }
 
   //printf("process_path: pathname = %s, name = %s\n", pathname, name);

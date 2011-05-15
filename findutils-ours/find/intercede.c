@@ -6,7 +6,7 @@
 
 // Help came from:
 // http://ramprasadk.wordpress.com/2010/06/09/c-programming-linux-color-text-output/
-#define _intercede_highlight "\033[7;30m"
+#define _intercede_highlight "\033[7;32m"
 #define _intercede_clear "\033[0m"
 
 
@@ -18,6 +18,7 @@ char* buf;
 // Which chunk of the pathname should be highlighted right now
 int dirIndex;
 int targetIndex;
+char *lastString;
 
 static void setIndex(int newIx) {
   dirIndex = newIx;
@@ -101,7 +102,6 @@ static void get_event(int *dirIx /* unused */) {
   ssize_t chrs = 0;
   makeInputUnbuffered();
 
-  printf("GetEvent called\n");
   while(1) {
     if(select(1, &set, NULL, NULL, NULL) <= 0) {
       fprintf(stderr, "Intercede: Terrible things happened waiting for input\n");
@@ -133,6 +133,7 @@ static void get_event(int *dirIx /* unused */) {
 static void init_events() {
   dirIndex = 2;
   targetIndex = -1;
+  lastString = "";
   if(pthread_create(&event_thread, NULL, &get_event, (void *)(&dirIndex)) != 0) {
     fprintf(stderr, "Intercede: couldn't create listener thread");
     exit(1);
@@ -148,7 +149,7 @@ static void init_events() {
 // print_with_highlight("/a/b/c", 1) --> "/a/<b>/c"
 // print_with_highlight("/a/b/c", 55) --> "/a/<b>/c"
 
-static int print_with_highlight(char *path, int index) {
+static int print_with_highlight(char *path, int index, boolean force) {
   int d = depth(path);
   int ix = getIndex(path, index);
   int found = 0;
@@ -199,12 +200,21 @@ static int print_with_highlight(char *path, int index) {
 
   unsigned short cols = w.ws_col;
   char outstr[cols];
-  //  snprintf(outstr, (size_t) (cols - 1), "%s%s%s%s%s", 
-  //       beforeHighlight, 
-  //       _intercede_highlight, 
-  //       highlight, 
-  //       _intercede_clear, 
-  //       afterHighlight);
+  char compstr[cols];
+  snprintf(compstr, (size_t) (cols - 1), "%s%s%s%s%s", 
+           beforeHighlight, 
+           _intercede_highlight, 
+           highlight, 
+           _intercede_clear, 
+           "...");
+
+  if(strcmp(compstr, lastString) == 0 && !force) {
+    return;
+  }
+  printf("\033[2K");
+  fflush(stdout);
+  lastString = compstr;
+
   //strcat(outstr, "\r");
 
   if(strlen(beforeHighlight) > (cols - 1)) {
@@ -226,21 +236,19 @@ static int print_with_highlight(char *path, int index) {
          strlen(afterHighlight) > (cols - 1)) {
         snprintf(outstr, (size_t) (cols - 1 - strlen(beforeHighlight) - 
                                    strlen(highlight)), 
-                 "%s", afterHighlight);
+                 "%s", "/...");
         print_quoted(stdout, opts, true, "%s\r", outstr);
       }
       else {
-        print_quoted(stdout, opts, true, "%s\r", afterHighlight);
+        print_quoted(stdout, opts, true, "%s\r", "/...");
       }
     }
   }
   fflush(stdout);
 }
 
-static int print_status() {
-  printf("\033[2K");
-  fflush(stdout);
-  print_with_highlight(buf, dirIndex);
+static int print_status(boolean force) {
+  print_with_highlight(buf, dirIndex, force);
   fflush(stdout);
   return 0;
 }
@@ -252,6 +260,6 @@ static int print_quoted_wrapper(FILE *stream,
 				const char *path) {
   printf("\033[2K");
   int ret = print_quoted(stream, opts, is_tty, str, path);
-  print_status();
+  print_status(true);
   return ret;
 }
